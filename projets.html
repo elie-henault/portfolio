@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets — Elie</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .card { cursor: pointer; }
+    .card:hover { box-shadow: 0 4px 20px rgba(74,124,111,0.13); transform: translateY(-3px); }
+    .card-hint { font-size: 12px; color: var(--accent-mid); margin-top: 0.75rem; }
+
+    /* OVERLAY */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .overlay.active { display: flex; }
+
+    /* MODAL */
+    .modal {
+      background: var(--bg);
+      border-radius: 18px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2rem 2.25rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      animation: popIn 0.25s ease both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+    }
+    .modal-close:hover { background: var(--accent-light); color: var(--accent); }
+
+    .modal-tag { margin-bottom: 0.75rem; }
+    .modal-title { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 1rem; color: var(--text); }
+
+    .modal-section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.4rem 0 0.5rem;
+    }
+
+    .modal-desc { font-size: 15px; color: var(--text); line-height: 1.75; }
+
+    .modal-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .modal-list li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    .modal-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-mid);
+      font-size: 12px;
+    }
+
+    .modal-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .modal-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.4rem 0 0;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Elie</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="competences.html">Compétences</a></li>
+    <li><a href="projets.html" class="active">Projets</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <div class="page-header fade fade-1">
+    <h1>Projets</h1>
+    <div class="divider"></div>
+    <p>Six projets menés cette année, chacun rattaché à une compétence du BUT Informatique.</p>
+  </div>
+
+  <div class="grid fade fade-2">
+
+    <div class="card" onclick="openModal('p1')">
+      <span class="tag">Compétence 1</span>
+      <p class="card-subtitle">Jeu Sokoban en C</p>
+      <p class="card-desc">J'ai développé seul un jeu Sokoban en C, en gérant les interactions clavier, la logique de blocage face aux murs, et la gestion mémoire du programme.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+    <div class="card" onclick="openModal('p2')">
+      <span class="tag">Compétence 2</span>
+      <p class="card-subtitle">Solveur Picross en Python</p>
+      <p class="card-desc">En équipe, on a développé un solveur de grilles Picross en Python avec un algorithme de backtracking couplé à de la propagation de contraintes.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+    <div class="card" onclick="openModal('p3')">
+      <span class="tag">Compétence 3</span>
+      <p class="card-subtitle">Installation de services réseau (SAÉ S2.03)</p>
+      <p class="card-desc">En groupe, on a installé et configuré un serveur Apache, PHP et MySQL sur une VM Debian afin de déployer un environnement web complet.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+    <div class="card" onclick="openModal('p4')">
+      <span class="tag">Compétence 4</span>
+      <p class="card-subtitle">Création d'une base de données</p>
+      <p class="card-desc">En équipe, on a conçu une base de données à partir d'un diagramme de classes UML, en modélisant les données et leurs relations.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+    <div class="card" onclick="openModal('p5')">
+      <span class="tag">Compétence 5</span>
+      <p class="card-subtitle">Création d'un site web en équipe</p>
+      <p class="card-desc">En équipe, on a conçu et développé un site web en HTML/CSS sur le Danemark, en nous répartissant les tâches.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+    <div class="card" onclick="openModal('p6')">
+      <span class="tag">Compétence 6</span>
+      <p class="card-subtitle">Découverte de l'environnement économique et écologique</p>
+      <p class="card-desc">En équipe, on a analysé les normes RSE d'une organisation pour comprendre les enjeux du secteur informatique.</p>
+      <p class="card-hint">Cliquer pour les détails →</p>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 — Elie · BUT Informatique · IUT de Lannion</p>
+</footer>
+
+<!-- MODALES -->
+
+<div class="overlay" id="overlay" onclick="closeOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const projets = {
+  p1: {
+    tag: 'Compétence 1',
+    title: 'Jeu Sokoban en C',
+    desc: "J'ai développé seul un jeu Sokoban en langage C. L'objectif était de recréer le jeu classique où le joueur pousse des caisses sur des cases cibles dans un labyrinthe, en implémentant toute la logique depuis zéro.",
+    items: [
+      "Gestion des interactions clavier pour déclencher des actions précises",
+      "Implémentation de la logique de déplacement et de blocage face aux murs",
+      "Vérification des conditions de victoire à chaque mouvement",
+      "Gestion rigoureuse de la mémoire pour assurer la stabilité du programme",
+    ],
+    learned: "Ce projet m'a permis de découvrir et d'apprendre les bases du C, un langage bas niveau que je ne connaissais pas avant cette année.",
+    tools: ['C', 'VS Code']
+  },
+  p2: {
+    tag: 'Compétence 2',
+    title: 'Solveur Picross en Python',
+    desc: "En équipe, on a développé un programme capable de résoudre automatiquement des grilles Picross (nonogrammes). L'objectif était de trouver la solution de la manière la plus optimale possible, en minimisant le nombre d'opérations.",
+    items: [
+      "Mise en place d'un algorithme de backtracking pour explorer les solutions",
+      "Intégration de la propagation de contraintes pour réduire l'espace de recherche",
+      "Optimisation des performances pour les grandes grilles",
+      "Travail en équipe avec répartition des tâches",
+    ],
+    learned: "Ce projet m'a permis de comprendre comment optimiser un algorithme et de découvrir la puissance du backtracking pour résoudre des problèmes complexes. J'ai aussi appris à travailler en équipe sur un projet technique.",
+    tools: ['Python', 'VS Code']
+  },
+  p3: {
+    tag: 'Compétence 3',
+    title: "Installation de services réseau (SAÉ S2.03)",
+    desc: "En groupe, on a installé et configuré des services réseau sur une machine virtuelle Debian afin de déployer un environnement complet de développement web. L'objectif était de répondre à un besoin client en mettant en place un serveur web, un langage serveur et une base de données.",
+    items: [
+      "Configuration et prise en main d'une machine virtuelle Debian sous VMware",
+      "Installation et configuration du serveur web Apache (vérification du statut, des modules, des fichiers de configuration)",
+      "Mise en place d'une zone d'administration privée protégée par authentification login/mot de passe",
+      "Activation et configuration du module PHP, tests avec phpinfo() et gestion des extensions de fichiers interprétées",
+      "Sécurisation du serveur MySQL avec mysql_secure_installation",
+      "Manipulation de bases de données en ligne de commande : création, insertion, modification et suppression d'enregistrements",
+      "Connexion PHP/MySQL et affichage dynamique des données via un script PHP",
+      "Installation du package php-mysql pour corriger les erreurs de connexion entre PHP et MySQL",
+    ],
+    learned: "Ce projet m'a appris à configurer un environnement serveur complet from scratch sous Linux. J'ai découvert le fonctionnement d'Apache, de PHP et de MySQL et appris à les faire communiquer ensemble. J'ai aussi gagné en autonomie sur la ligne de commande Linux et la gestion des fichiers de configuration.",
+    tools: ['Linux Debian', 'Apache2', 'PHP', 'MySQL', 'VMware', 'Bash']
+  },
+  p4: {
+    tag: 'Compétence 4',
+    title: 'Création d\'une base de données',
+    desc: "En équipe, on a travaillé sur la conception complète d'une base de données. Le projet portait sur la modélisation des données avant toute implémentation, en partant d'un cahier des charges précis.",
+    items: [
+      "Analyse du cahier des charges et identification des entités",
+      "Réalisation d'un diagramme de classes UML",
+      "Modélisation des relations entre les entités",
+      "Vérification de la cohérence et de la normalisation du modèle",
+    ],
+    learned: "Ce projet m'a permis de découvrir la modélisation des données et de comprendre comment structurer une base de données avant de l'implémenter. J'ai appris à utiliser UML comme outil de conception.",
+    tools: ['UML', 'SQL', 'MySQL']
+  },
+  p5: {
+    tag: 'Compétence 5',
+    title: 'Création d\'un site web en équipe',
+    desc: "En équipe, on a conçu et développé un site web complet sur le Danemark. Ce projet nous a placés dans une situation de conduite de projet réelle, avec des contraintes de délais et de cohérence collective.",
+    items: [
+      "Répartition des tâches entre les membres de l'équipe",
+      "Conception des maquettes avant le développement",
+      "Développement des pages en HTML et CSS",
+      "Mise en place d'une navigation cohérente entre les pages",
+      "Livraison d'un rendu uniforme malgré le travail en parallèle",
+    ],
+    learned: "Ce projet m'a appris à travailler en équipe sur un projet web, à me coordonner avec les autres et à livrer un résultat cohérent malgré le travail en parallèle. J'ai aussi renforcé mes compétences en HTML/CSS.",
+    tools: ['HTML', 'CSS', 'VS Code']
+  },
+  p6: {
+    tag: 'Compétence 6',
+    title: 'Découverte de l\'environnement économique et écologique',
+    desc: "En équipe, on a sélectionné une organisation du secteur informatique et analysé ses pratiques en matière de RSE (Responsabilité Sociétale des Entreprises). Ce projet nous a permis de mieux comprendre les enjeux du secteur au-delà du technique.",
+    items: [
+      "Sélection et présentation de l'organisation choisie",
+      "Analyse des normes et engagements RSE de l'entreprise",
+      "Étude des enjeux environnementaux liés au numérique",
+      "Restitution collective des résultats",
+    ],
+    learned: "Ce projet m'a ouvert les yeux sur les enjeux RSE du secteur informatique. J'ai appris à mener une analyse documentaire, à restituer des informations de façon structurée, et à travailler efficacement en équipe.",
+    tools: ['Recherche documentaire', 'Présentation orale', 'Travail en équipe']
+  }
+};
+
+function openModal(id) {
+  const p = projets[id];
+  document.getElementById('modal-content').innerHTML = `
+    <span class="tag modal-tag">${p.tag}</span>
+    <p class="modal-title">${p.title}</p>
+    <p class="modal-section-label">Description</p>
+    <p class="modal-desc">${p.desc}</p>
+    <p class="modal-section-label">Ce qui a été mis en place</p>
+    <ul class="modal-list">${p.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    <p class="modal-section-label">Ce que ce projet m'a apporté</p>
+    <p class="modal-desc">${p.learned}</p>
+    <div class="modal-divider"></div>
+    <p class="modal-section-label">Outils utilisés</p>
+    <div class="modal-tools">${p.tools.map(t => `<span class="skill-pill">${t}</span>`).join('')}</div>
+  `;
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeOnOverlay(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Elie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Elie</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="competences.html">Compétences</a></li>
+    <li><a href="projets.html">Projets</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+  <div class="page-header fade fade-1">
+    <h1>Contact</h1>
+    <div class="divider"></div>
+    <p>Une question, une opportunité, ou juste un message ? N'hésite pas à me contacter.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;" class="fade fade-2">
+
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="votre@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Votre message..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Envoyer</button>
+      <p id="confirm" style="margin-top: 1rem; color: var(--accent); font-size: 14px; display: none;">
+        ✓ Message envoyé, merci !
+      </p>
+    </form>
+
+    <div style="padding-top: 0.5rem;">
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">Formation</p>
+        <p style="font-size: 15px; color: var(--text);">BUT Informatique — 1ère année</p>
+        <p style="font-size: 14px; color: var(--text-muted);">IUT de Lannion</p>
+      </div>
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">Localisation</p>
+        <p style="font-size: 15px; color: var(--text);">Lannion, Bretagne</p>
+      </div>
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">Email</p>
+        <a href="mailto:e.henault08@gmail.com" style="font-size: 15px; color: var(--accent); text-decoration: none;">e.henault08@gmail.com</a>
+      </div>
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">Téléphone</p>
+        <a href="tel:+33749608008" style="font-size: 15px; color: var(--accent); text-decoration: none;">07 49 60 80 08</a>
+      </div>
+      <div style="margin-bottom: 2rem;">
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">LinkedIn</p>
+        <a href="https://www.linkedin.com/in/elie-henault-b705313ba/" target="_blank" style="font-size: 15px; color: var(--accent); text-decoration: none;">linkedin.com/in/elie-henault</a>
+      </div>
+      <div>
+        <p style="font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem;">Centres d'intérêt</p>
+        <div class="skills-list">
+          <span class="skill-pill">Développement</span>
+          <span class="skill-pill">Photographie auto</span>
+          <span class="skill-pill">Simulation</span>
+          <span class="skill-pill">Football</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 — Elie · BUT Informatique · IUT de Lannion</p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('confirm').style.display = 'block';
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
